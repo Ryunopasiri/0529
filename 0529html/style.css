@@ -83,23 +83,39 @@ header .container {
 header h1 a {
     color: #fff;
     font-size: 1.8em;
+    white-space: nowrap; /* ロゴが長い場合に改行されるのを防ぐ */
 }
 header h1 a:hover {
     text-decoration: none;
 }
 
+header nav {
+    flex-grow: 1; /* 利用可能なスペースを埋めるようにする */
+    display: flex;
+    justify-content: center; /* メニュー全体を中央に配置 (デスクトップ時) */
+    margin-left: 20px; /* ロゴとメニューの間に少しスペース */
+}
+
 header nav ul {
     list-style: none;
     display: flex;
+    justify-content: space-around; /* 各li要素が均等な間隔で配置されます */
+    width: 100%; /* nav要素いっぱいに広がるように */
+    padding: 0;
+    align-items: center; /* 項目が複数行になった場合の垂直中央揃え */
 }
 
 header nav ul li {
-    margin-left: 20px;
+    /* padding: 0 5px; */ /* 必要に応じて左右のパディングを追加 */
 }
 
 header nav ul li a {
     color: #fff;
     font-weight: bold;
+    padding: 10px 15px; /* クリックエリアを確保しつつ、均等配置を助ける */
+    display: block; /* paddingを有効にするため */
+    white-space: nowrap; /* メニュー項目が長い場合に改行されるのを防ぐ */
+    transition: color 0.3s ease;
 }
 header nav ul li a:hover {
     color: #d90429;
@@ -117,68 +133,75 @@ header nav ul li a:hover {
 
 /* ヒーローセクション (トップページメインビジュアル) */
 .hero {
-    background: url('images/f1_hero_placeholder.jpg') no-repeat center center/cover; /* imagesフォルダにf1_hero_placeholder.jpgを配置 */
+    background: url('images/f1_hero_placeholder.jpg') no-repeat center center/cover;
     color: #fff;
-    height: 70vh;
+    min-height: 60vh; /* 最小高さを設定 */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 20px;
+    padding: 20px; /* パディングを追加して端に寄りすぎないように */
     border-bottom: 5px solid #d90429;
 }
 
 .hero-content {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.6); /* 少し濃くして文字を読みやすく */
+    padding: 30px 40px;
     border-radius: 10px;
+    max-width: 800px; /* コンテンツが広がりすぎないように */
 }
 
 .hero h2 {
     font-size: 3em;
     margin-bottom: 0.5em;
     color: #fff;
+    line-height: 1.2;
 }
 
 .hero p {
     font-size: 1.2em;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em; /* ボタンとの間隔を調整 */
 }
 
 /* トップページ詳細セクション */
 #home-details {
     background-color: #fff;
+    padding-top: 20px; /* 上のセクションとの間隔 */
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* カードの最小幅調整 */
+    gap: 25px; /* カード間のスペースを少し広げる */
 }
 
 .grid-item {
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 25px; /* パディングを少し増やす */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07); /* 影を少し調整 */
+    display: flex; /* flexboxを使って内容を整える */
+    flex-direction: column;
 }
 
 .grid-item h3 {
     margin-top: 0;
     border-bottom: 2px solid #d90429;
     padding-bottom: 0.5em;
+    font-size: 1.3em; /* 見出しサイズ調整 */
 }
 
 .grid-item ul {
     list-style: none;
     padding-left: 0;
+    margin-bottom: 1em; /* リストと「もっと見る」リンクの間にスペース */
+    flex-grow: 1; /* リンクが下に来るように */
 }
 
 .grid-item ul li {
-    margin-bottom: 0.5em;
-    font-size: 0.9em;
+    margin-bottom: 0.6em;
+    font-size: 0.95em; /* テキストサイズ調整 */
 }
 
 .grid-item ul li a {
@@ -190,32 +213,45 @@ header nav ul li a:hover {
 
 .more-link {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: auto; /* これでリンクがカードの下端に揃う (flexbox内) */
     font-weight: bold;
     font-size: 0.9em;
+    align-self: flex-start; /* リンクが左寄せになるように */
 }
 
 #countdown-timer {
-    font-size: 1.2em;
+    font-size: 1.3em; /* 少し大きく */
     font-weight: bold;
     color: #d90429;
-    margin: 10px 0;
+    margin: 15px 0; /* 上下のマージン調整 */
+    text-align: center;
 }
 
-/* 各セクションのプレースホルダー */
+.next-gp p {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* 各セクションのプレースホルダー (コンテンツが入ると不要になる) */
 .content-placeholder {
     background-color: #fff;
-    padding: 30px;
+    padding: 40px; /* パディングを増やす */
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+    min-height: 200px; /* 最低限の高さを確保 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .content-placeholder p {
     margin-bottom: 20px;
     font-size: 1.1em;
+    color: #555;
 }
 .guide-sections a, .explore-sections a {
-    margin: 5px;
+    margin: 8px; /* ボタン間のマージン調整 */
 }
 
 
@@ -224,50 +260,82 @@ footer {
     background-color: #1e1e1e;
     color: #ccc;
     text-align: center;
-    padding: 30px 0;
+    padding: 40px 20px; /* パディング調整 */
     font-size: 0.9em;
 }
 
 footer .footer-links {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* 間隔調整 */
 }
 
 footer .footer-links a {
     color: #ccc;
-    margin: 0 10px;
+    margin: 0 12px; /* リンク間のマージン調整 */
+    transition: color 0.3s ease;
 }
 footer .footer-links a:hover {
     color: #fff;
 }
 
 footer .social-media {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* 間隔調整 */
 }
 footer .social-media p {
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* テキストとアイコンの間隔 */
 }
 footer .social-media a {
     color: #fff;
-    margin: 0 8px;
-    font-size: 1.5em; /* アイコンフォントを使用する場合のサイズ例 */
+    margin: 0 10px; /* アイコン間のマージン */
+    font-size: 1.6em;
+    transition: color 0.3s ease;
 }
 footer .social-media a:hover {
     color: #d90429;
 }
 
 footer p {
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* 各段落間のマージン */
+    line-height: 1.5;
 }
 
-/* レスポンシブデザイン (簡易版) */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        align-items: flex-start;
+/* レスポンシブデザイン */
+@media (max-width: 992px) { /* 少し広めのブレークポイントを追加 */
+    .hero h2 {
+        font-size: 2.5em;
+    }
+    .hero p {
+        font-size: 1.1em;
     }
     header nav {
+        margin-left: 10px; /* ロゴとメニューの間を少し詰める */
+    }
+    header nav ul li a {
+        padding: 10px; /* パディングを少し減らす */
+        font-size: 0.9em; /* メニュー文字を少し小さく */
+    }
+}
+
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row; /* ロゴとハンバーガーメニューを横並びに */
+        justify-content: space-between; /* これでロゴが左、ハンバーガーが右に */
+        align-items: center;
+        position: relative; /* ハンバーガーメニューの位置調整のため */
+    }
+    header h1 {
+        margin-bottom: 0; /* モバイル時のh1下のマージンをリセット */
+    }
+    header nav {
+        display: none; /* 初期状態では非表示 */
+        position: absolute;
+        top: 100%; /* ヘッダーの真下に表示 */
+        left: 0;
         width: 100%;
-        display: none; /* JSで制御 */
+        background-color: #1e1e1e; /* 背景色を指定 */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 999; /* 他の要素より手前に */
+        margin-left: 0; /* リセット */
     }
     header nav.active { /* JSでactiveクラスを付与 */
         display: block;
@@ -275,30 +343,61 @@ footer p {
     header nav ul {
         flex-direction: column;
         width: 100%;
+        align-items: stretch; /* 各項目が幅いっぱいに広がるように */
     }
     header nav ul li {
-        margin: 10px 0;
-        text-align: center;
+        margin: 0; /* リセット */
+        text-align: left; /* テキストを左寄せに */
         border-bottom: 1px solid #444;
     }
     header nav ul li:last-child {
         border-bottom: none;
     }
+    header nav ul li a {
+        padding: 15px 20px; /* パディングを調整してタップしやすく */
+        width: 100%;
+        font-size: 1em; /* フォントサイズを戻すか調整 */
+    }
     .mobile-menu-button {
         display: block;
-        position: absolute;
-        top: 15px;
-        right: 20px;
+        /* position: absolute; は不要に、flexアイテムとして配置される */
+        /* top: 15px; right: 20px; は不要に */
     }
 
+    .hero {
+        min-height: 50vh;
+    }
     .hero h2 {
         font-size: 2em;
     }
     .hero p {
         font-size: 1em;
     }
+    .hero-content {
+        padding: 20px;
+    }
 
     .grid-container {
         grid-template-columns: 1fr; /* 1列表示 */
+    }
+    .grid-item {
+        padding: 20px;
+    }
+    .page-content {
+        padding: 0 15px; /* ページ全体の左右パディング */
+    }
+    section {
+        padding: 30px 0;
+    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.2em; }
+
+    footer {
+        padding: 30px 15px;
+    }
+    footer .footer-links a {
+        display: block; /* 縦並びに */
+        margin: 8px 0;
     }
 }
