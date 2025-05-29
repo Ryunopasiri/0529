@@ -3,179 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 F1 ファンサイト - 最新情報とガイド</title>
+    <title>Nova Spark - 解き放て、内なる閃光を。</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="2025年のF1シーズンに関する最新ニュース、レース情報、チーム・ドライバー紹介、レギュレーション解説などを網羅したファンサイトです。">
+    <meta name="description" content="Nova Sparkは、あなたの集中力と創造性をブーストする次世代エナジードリンク。天然由来成分でクリアなエネルギーを。">
+    <!-- Google Fonts (例: Montserrat, Orbitron) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1><a href="index.html">2025 F1 ファンサイト</a></h1>
+            <a href="#" class="logo">
+                <img src="images/nova_spark_logo.png" alt="Nova Spark Logo">
+                <!-- ロゴ画像をimagesフォルダに配置してください -->
+            </a>
             <nav>
                 <ul>
-                    <li><a href="#home">ホーム</a></li>
-                    <li><a href="#news">ニュース & 分析</a></li>
-                    <li><a href="#season-guide">シーズンガイド</a></li>
-                    <li><a href="#explore-f1">F1の世界</a></li>
-                    <li><a href="#gallery">ギャラリー</a></li>
-                    <li><a href="#fan-zone">ファンゾーン</a></li>
-                    <li><a href="#how-to-watch">観戦ガイド</a></li>
+                    <li><a href="#features">特徴</a></li>
+                    <li><a href="#ingredients">成分</a></li>
+                    <li><a href="#lineup">ラインナップ</a></li>
+                    <li><a href="#story">ストーリー</a></li>
+                    <li><a href="#buy-now" class="cta-button nav-cta">今すぐ購入</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-button" aria-label="メニューを開く">☰</button>
+            <button class="mobile-menu-button" aria-label="メニューを開く" aria-expanded="false">☰</button>
         </div>
     </header>
 
     <main>
-        <!-- 1. トップページ (ホーム) -->
-        <section id="home" class="hero">
+        <!-- ヒーローセクション -->
+        <section id="hero" class="hero-section">
             <div class="hero-content">
-                <h2>2025年F1シーズン、新たな戦いが始まる！</h2>
-                <p>最新情報、詳細ガイド、ファンコミュニティはこちらで。</p>
-                <a href="#news" class="cta-button">最新ニュースを見る</a>
+                <h1 class="glitch" data-text="NOVA SPARK">NOVA SPARK</h1>
+                <h2>解き放て、内なる閃光を。</h2>
+                <p>集中力の限界を超え、創造性を加速させる。次世代エナジードリンク「ノヴァ・スパーク」で、未知の可能性へ。</p>
+                <a href="#lineup" class="cta-button hero-cta">製品ラインナップを見る</a>
             </div>
-            <!-- メインビジュアルはCSSのbackground-imageで設定推奨 -->
+            <div class="hero-product-image">
+                <img src="images/nova_spark_can_main.png" alt="Nova Spark エナジードリンク缶">
+                <!-- メインの缶画像をimagesフォルダに配置してください -->
+            </div>
         </section>
 
-        <div class="container page-content">
-            <section id="home-details">
-                <div class="grid-container">
-                    <article class="grid-item news-headlines">
-                        <h3>最新ニュースヘッドライン</h3>
-                        <ul>
-                            <li><a href="news_article_1.html">2025年 新レギュレーションの噂を徹底解説</a> (2024/MM/DD)</li>
-                            <li><a href="news_article_2.html">注目ドライバー〇〇、来季の契約更新！</a> (2024/MM/DD)</li>
-                            <li><a href="news_article_3.html">プレシーズンテストの日程が決定</a> (2024/MM/DD)</li>
-                        </ul>
-                        <a href="#news" class="more-link">全てのニュースを見る &raquo;</a>
-                    </article>
-
-                    <article class="grid-item next-gp">
-                        <h3>次戦グランプリ情報</h3>
-                        <p><strong>[グランプリ名]</strong></p>
-                        <p>開催日: 2025/MM/DD - MM/DD</p>
-                        <p>サーキット: [サーキット名]</p>
-                        <div id="countdown-timer">00日 00時間 00分 00秒</div>
-                        <p>日本時間セッション開始時刻 (予定):<br>
-                           FP1: MM/DD HH:MM | FP2: MM/DD HH:MM <br>
-                           FP3: MM/DD HH:MM | 予選: MM/DD HH:MM <br>
-                           決勝: MM/DD HH:MM
-                        </p>
-                    </article>
-
-                    <article class="grid-item rankings-preview">
-                        <h3>ランキング速報 (2024年最終)</h3>
-                        <p><strong>ドライバーズ:</strong><br>
-                           1. [ドライバー名] ([ポイント]pts)<br>
-                           2. [ドライバー名] ([ポイント]pts)<br>
-                           3. [ドライバー名] ([ポイント]pts)
-                        </p>
-                        <p><strong>コンストラクターズ:</strong><br>
-                           1. [チーム名] ([ポイント]pts)<br>
-                           2. [チーム名] ([ポイント]pts)<br>
-                           3. [チーム名] ([ポイント]pts)
-                        </p>
-                        <a href="#season-guide" class="more-link">詳細ランキングを見る &raquo;</a>
-                    </article>
-
-                    <article class="grid-item featured-content">
-                        <h3>注目コンテンツ</h3>
-                        <ul>
-                            <li><a href="feature_season_preview.html">2025シーズン徹底プレビュー</a></li>
-                            <li><a href="feature_tech_explained.html">図解！F1マシンの技術</a></li>
-                            <li><a href="feature_driver_spotlight.html">人気ドライバー特集：[ドライバー名]</a></li>
-                        </ul>
-                    </article>
-                </div>
-            </section>
-
-            <!-- 2. ニュース & 分析 (News & Analysis) -->
-            <section id="news">
-                <h2>ニュース & 分析</h2>
-                <div class="content-placeholder">
-                    <p>ここには最新F1ニュース、レースレポート、特集記事などが表示されます。</p>
-                    <p>例: ニュース記事のリスト、カテゴリーフィルターなど</p>
-                    <a href="all_news.html" class="button">全てのニュース & 分析を見る</a>
-                </div>
-            </section>
-
-            <!-- 3. 2025年シーズンガイド (Season Guide) -->
-            <section id="season-guide">
-                <h2>2025年シーズンガイド</h2>
-                <div class="content-placeholder">
-                    <p>開催カレンダー、チーム紹介、ドライバー紹介、レギュレーション解説などが表示されます。</p>
-                    <div class="guide-sections">
-                        <a href="calendar.html" class="button">開催カレンダー</a>
-                        <a href="teams.html" class="button">チーム紹介</a>
-                        <a href="drivers.html" class="button">ドライバー紹介</a>
-                        <a href="regulations.html" class="button">レギュレーション解説</a>
+        <!-- 特徴セクション -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Nova Sparkが選ばれる理由</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <img src="images/icon_focus.svg" alt="集中力アイコン">
+                        <h3>クリアな集中力</h3>
+                        <p>厳選された天然由来カフェインとアダプトゲンハーブが、クリアでシャープな集中状態へと導きます。</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="images/icon_energy.svg" alt="エネルギーアイコン">
+                        <h3>持続するエネルギー</h3>
+                        <p>急激なアップダウンのない、安定したエネルギーフロー。パフォーマンスを持続させたいあなたへ。</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="images/icon_natural.svg" alt="天然成分アイコン">
+                        <h3>こだわりの天然素材</h3>
+                        <p>身体への優しさを追求し、合成保存料・人工着色料は不使用。自然の恵みを最大限に活かしました。</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="images/icon_taste.svg" alt="味アイコン">
+                        <h3>洗練されたフレーバー</h3>
+                        <p>従来のイメージを覆す、軽やかでリフレッシングな味わい。毎日でも飲み続けたくなる美味しさです。</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- 4. F1の世界 (Explore F1) -->
-            <section id="explore-f1">
-                <h2>F1の世界</h2>
-                <div class="content-placeholder">
-                    <p>F1とは？、技術の深淵、伝説と記録、F1用語集などが表示されます。</p>
-                     <div class="explore-sections">
-                        <a href="what_is_f1.html" class="button">F1とは？</a>
-                        <a href="f1_technology.html" class="button">技術の深淵</a>
-                        <a href="legends_records.html" class="button">伝説と記録</a>
-                        <a href="f1_glossary.html" class="button">F1用語集</a>
+        <!-- 成分紹介セクション -->
+        <section id="ingredients" class="ingredients-section">
+            <div class="container">
+                <h2>パフォーマンスを支える主要成分</h2>
+                <div class="ingredient-highlight">
+                    <div class="ingredient-image">
+                        <img src="images/ingredient_guarana.jpg" alt="ガラナ">
+                         <!-- ガラナの画像をimagesフォルダに配置 -->
+                    </div>
+                    <div class="ingredient-desc">
+                        <h3>天然由来カフェイン (ガラナ種子エキス)</h3>
+                        <p>アマゾン原産のスーパーフード、ガラナから抽出。穏やかに吸収され、持続的な覚醒効果をもたらします。集中力と思考の明晰さをサポート。</p>
                     </div>
                 </div>
-            </section>
-
-            <!-- 5. ギャラリー (Gallery) -->
-            <section id="gallery">
-                <h2>ギャラリー</h2>
-                <div class="content-placeholder">
-                    <p>高画質写真、ビデオクリップなどが表示されます。</p>
-                    <p>例: グランプリ別、マシン別などのフォトギャラリー</p>
-                    <a href="photo_gallery.html" class="button">ギャラリーを見る</a>
+                <div class="ingredient-highlight reverse">
+                    <div class="ingredient-image">
+                        <img src="images/ingredient_ginkgo.jpg" alt="イチョウ葉">
+                        <!-- イチョウ葉の画像をimagesフォルダに配置 -->
+                    </div>
+                    <div class="ingredient-desc">
+                        <h3>スマートハーブブレンド (イチョウ葉エキス、ロディオラエキス)</h3>
+                        <p>古来より知恵のハーブとして用いられるイチョウ葉と、ストレス対応力を高めるロディオラを配合。冴えわたる思考と精神的なタフネスを。</p>
+                    </div>
                 </div>
-            </section>
-
-            <!-- 6. ファンゾーン (Fan Zone) (オプション) -->
-            <section id="fan-zone">
-                <h2>ファンゾーン</h2>
-                <div class="content-placeholder">
-                    <p>投票・アンケート、F1クイズ、掲示板などが表示されます。</p>
-                    <p>（これらの機能は動的な処理が必要なため、この雛形では静的表示です）</p>
-                    <a href="fan_poll.html" class="button">最新の投票を見る</a>
+                 <div class="ingredient-highlight">
+                    <div class="ingredient-image">
+                        <img src="images/ingredient_b_vitamins.jpg" alt="ビタミンB群">
+                        <!-- ビタミンB群のイメージ画像をimagesフォルダに配置 -->
+                    </div>
+                    <div class="ingredient-desc">
+                        <h3>エナジービタミン群 (B6, B12)</h3>
+                        <p>エネルギー代謝に不可欠なビタミンB群を強化。身体の基礎エネルギー生成をサポートし、活動的な毎日を応援します。</p>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- 7. 観戦ガイド (How to Watch) -->
-            <section id="how-to-watch">
-                <h2>観戦ガイド</h2>
-                <div class="content-placeholder">
-                    <p>日本国内での視聴方法、関連イベント情報などが表示されます。</p>
-                    <a href="watch_guide_japan.html" class="button">視聴方法詳細</a>
+        <!-- ラインナップセクション -->
+        <section id="lineup" class="lineup-section">
+            <div class="container">
+                <h2>CHOOSE YOUR SPARK - ラインナップ</h2>
+                <div class="lineup-grid">
+                    <div class="product-card">
+                        <img src="images/nova_spark_original.png" alt="Nova Spark Original">
+                        <!-- オリジナル缶の画像をimagesフォルダに配置 -->
+                        <h3>Nova Spark - ORIGINAL</h3>
+                        <p class="flavor-desc">シトラスミントの覚醒フレーバー</p>
+                        <p>突き抜ける爽快感で、一瞬で集中モードへ。Nova Sparkの原点。</p>
+                        <span class="price">¥200 (税抜)</span>
+                        <button class="buy-button">カートに入れる</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="images/nova_spark_zero.png" alt="Nova Spark Zero Sugar">
+                        <!-- ゼロシュガー缶の画像をimagesフォルダに配置 -->
+                        <h3>Nova Spark - ZERO SUGAR</h3>
+                        <p class="flavor-desc">クリアベリーの無重力フレーバー</p>
+                        <p>カロリーを気にせず、パフォーマンスを最大化。軽やかなのにパワフル。</p>
+                        <span class="price">¥200 (税抜)</span>
+                        <button class="buy-button">カートに入れる</button>
+                    </div>
+                    <div class="product-card coming-soon">
+                        <img src="images/nova_spark_ignite.png" alt="Nova Spark Ignite (Coming Soon)">
+                        <!-- 新フレーバー缶の画像をimagesフォルダに配置 -->
+                        <h3>Nova Spark - IGNITE <span class="soon-badge">COMING SOON</span></h3>
+                        <p class="flavor-desc">スパイシーマンゴーの情熱フレーバー</p>
+                        <p>内なる炎を燃え上がらせる、刺激的な限定フレーバー。ご期待ください！</p>
+                        <button class="buy-button" disabled>近日発売</button>
+                    </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <!-- ストーリー/ブランドメッセージセクション -->
+        <section id="story" class="story-section">
+            <div class="container">
+                <h2>OUR PHILOSOPHY - Nova Sparkの想い</h2>
+                <div class="story-content">
+                    <p>私たちは信じています。誰もが内に秘めた「閃光＝スパーク」を持っていると。</p>
+                    <p>Nova Sparkは、単なるエナジードリンクではありません。それは、あなたの挑戦を後押しし、創造性を刺激し、最高のパフォーマンスを引き出すための触媒です。</p>
+                    <p>人工的なものではなく、自然の力を借りて。一瞬のブーストではなく、持続可能な集中力を。Nova Sparkは、あなたが自身の限界を超え、まだ見ぬ自分に出会うためのパートナーです。</p>
+                    <p>さあ、Nova Sparkと共に、あなただけの閃光を世界に解き放とう。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 購入/CTAセクション -->
+        <section id="buy-now" class="cta-section">
+            <div class="container">
+                <h2>READY TO IGNITE YOUR POTENTIAL?</h2>
+                <p>Nova Sparkを手に入れて、あなたの毎日をアップデートしよう。</p>
+                <div class="store-buttons">
+                    <a href="#" class="store-button online-store">公式オンラインストア</a>
+                    <a href="#" class="store-button amazon">Amazonで購入</a>
+                    <a href="#" class="store-button retail">取扱店舗を探す</a>
+                </div>
+                <p class="discount-info">初回購入限定！お得なトライアルセットもご用意しています。</p>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="container">
-            <!-- 8. その他 -->
-            <div class="footer-links">
-                <a href="sitemap.html">サイトマップ</a>
-                <a href="privacy.html">プライバシーポリシー</a>
-                <a href="disclaimer.html">免責事項</a>
-                <a href="contact.html">お問い合わせ</a>
-                <a href="about.html">このサイトについて</a>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/nova_spark_logo_white.png" alt="Nova Spark Logo White">
+                    <!-- 白背景用のロゴ画像をimagesフォルダに配置 -->
+                </div>
+                <div class="footer-links">
+                    <h4>製品情報</h4>
+                    <ul>
+                        <li><a href="#features">特徴</a></li>
+                        <li><a href="#ingredients">成分</a></li>
+                        <li><a href="#lineup">ラインナップ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>サポート</h4>
+                    <ul>
+                        <li><a href="#">よくある質問</a></li>
+                        <li><a href="#">お問い合わせ</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">特定商取引法に基づく表記</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>フォローする</h4>
+                    <a href="#" aria-label="X (旧Twitter)"><img src="images/icon_x_white.svg" alt="X"></a>
+                    <a href="#" aria-label="Instagram"><img src="images/icon_instagram_white.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Facebook"><img src="images/icon_facebook_white.svg" alt="Facebook"></a>
+                </div>
             </div>
-            <div class="social-media">
-                <p>フォローして最新情報をゲット！</p>
-                <a href="#" aria-label="X (旧Twitter)">X</a>
-                <a href="#" aria-label="Instagram">Instagram</a>
-                <a href="#" aria-label="Facebook">Facebook</a>
+            <div class="copyright">
+                <p>&copy; 2024 Nova Spark Beverages. All Rights Reserved.</p>
+                <p class="warning">※飲み過ぎに注意してください。お子様、妊娠中または授乳中の方、カフェインに敏感な方は飲用をお控えください。</p>
             </div>
-            <p>&copy; 2024-2025 [あなたのサイト名またはあなたのお名前]. All Rights Reserved.</p>
-            <p>※このサイトはF1ファンのための非公式サイトです。F1、FIA、各チームの公式情報もご確認ください。</p>
         </div>
     </footer>
 

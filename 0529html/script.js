@@ -1,76 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    // モバイルメニューのトグル機能
+    // モバイルメニューのトグル
     const menuButton = document.querySelector('.mobile-menu-button');
     const nav = document.querySelector('header nav');
 
     if (menuButton && nav) {
-        menuButton.addEventListener('click', function() {
+        menuButton.addEventListener('click', () => {
             nav.classList.toggle('active');
-            // アクセシビリティ対応: aria-expanded属性を切り替える
-            const expanded = nav.classList.contains('active');
-            menuButton.setAttribute('aria-expanded', expanded);
-            menuButton.setAttribute('aria-label', expanded ? 'メニューを閉じる' : 'メニューを開く');
+            const isActive = nav.classList.contains('active');
+            menuButton.setAttribute('aria-expanded', isActive);
+            menuButton.textContent = isActive ? '✕' : '☰'; // アイコン変更
         });
     }
 
-    // 次戦グランプリまでのカウントダウンタイマー (簡易版、実際の目標日時を設定してください)
-    const countdownElement = document.getElementById('countdown-timer');
-    if (countdownElement) {
-        // 例: 2025年3月15日 15:00:00 を目標日時とする
-        const targetDate = new Date("Mar 15, 2025 15:00:00").getTime();
-
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                countdownElement.innerHTML = "レース開催中または終了";
-                clearInterval(interval); // カウントダウン終了
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdownElement.innerHTML = 
-                days + "日 " + 
-                String(hours).padStart(2, '0') + "時間 " + 
-                String(minutes).padStart(2, '0') + "分 " + 
-                String(seconds).padStart(2, '0') + "秒";
-        };
-        
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // 初回実行
-    }
-
-    // スムーズスクロール (アンカーリンク用)
+    // スムーズスクロール
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            // hrefが"#"だけ、または""の場合は何もしない (トップに戻るデフォルト動作を防ぐためなど)
-            if (href === '#' || href === '') return;
+            // hrefが"#"だけ、または""の場合はデフォルトの動作を許可 (ページトップなど)
+            // 今回のケースではhref="#"のリンクは無いので、ほぼ常にpreventDefaultされる
+            if (href === '#' || href === '' || !document.querySelector(href)) {
+                // hrefが"#"だけ、または存在しない要素へのリンクの場合は何もしないか、
+                // デフォルト動作（ページトップなど）をさせたい場合はこのブロックを調整
+                return;
+            }
 
+            e.preventDefault(); // 有効なアンカーリンクの場合のみ実行
             const targetElement = document.querySelector(href);
+
             if (targetElement) {
-                e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
+                const header = document.querySelector('header');
+                const headerOffset = header ? header.offsetHeight : 70; // ヘッダーの高さを取得、なければデフォルト値
+                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
                 });
+
                 // モバイルメニューが開いていたら閉じる
                 if (nav && nav.classList.contains('active')) {
                     nav.classList.remove('active');
                     menuButton.setAttribute('aria-expanded', 'false');
-                    menuButton.setAttribute('aria-label', 'メニューを開く');
+                    menuButton.textContent = '☰';
                 }
             }
         });
     });
 
-    // ここに他のJavaScriptの機能を追加していきます
-    // 例: ギャラリーのスライドショー、フォームのバリデーションなど
-    console.log("2025 F1 Fan Site Initialized!");
+    // スクロールに応じたヘッダーのスタイル変更
+    const header = document.querySelector('header');
+    if (header) { // header要素が存在することを確認
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(var(--dark-bg-rgb), 0.95)'; // 少し濃くする
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+            } else {
+                header.style.backgroundColor = 'rgba(var(--dark-bg-rgb), 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    }
 
+
+    // Glitch H1のdata-text属性を設定
+    const glitchH1 = document.querySelector('.glitch');
+    if (glitchH1) {
+        glitchH1.setAttribute('data-text', glitchH1.textContent);
+    }
+
+    console.log("Nova Spark Landing Page Initialized!");
 });

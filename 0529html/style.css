@@ -1,4 +1,21 @@
-/* 基本的なリセットと共通スタイル */
+/* 基本スタイル */
+:root {
+    --primary-color: #00ffff; /* サイバーな水色 (Nova Sparkのブランドカラー1) */
+    --secondary-color: #ff00ff; /* マゼンタ (アクセントカラー) */
+    --dark-bg: #0d0d2b; /* 深い紺色 (背景のメイン) */
+    --light-text: #e0e0e0;
+    --dark-text: #1a1a1a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --font-primary: 'Montserrat', sans-serif;
+    --font-accent: 'Orbitron', sans-serif;
+    --transition-speed: 0.3s ease;
+
+    /* RGB変数 (CSS変数内で直接rgbaを使えない場合があるため) */
+    --primary-color-rgb: 0, 255, 255;
+    --secondary-color-rgb: 255, 0, 255;
+    --dark-bg-rgb: 13, 13, 43;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,398 +23,611 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.7;
+    overflow-x: hidden; /* 横スクロールバー対策 */
 }
 
 .container {
     width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    overflow: hidden; /* clearfix for floated elements if any */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 a {
-    color: #d90429; /* F1的な赤色 */
     text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--transition-speed);
 }
-
 a:hover {
-    text-decoration: underline;
+    color: var(--secondary-color);
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
+    font-family: var(--font-accent);
     margin-bottom: 0.8em;
-    color: #1e1e1e;
+    line-height: 1.3;
 }
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--primary-color); }
+h2 { font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 1.5em; }
+h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--primary-color); }
 
-h1 { font-size: 2.5em; }
-h2 { font-size: 2em; }
-h3 { font-size: 1.5em; }
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 
 section {
-    padding: 40px 0;
-    border-bottom: 1px solid #ddd;
-}
-section:last-of-type {
-    border-bottom: none;
+    padding: 80px 0;
 }
 
-.button, .cta-button {
+.cta-button {
     display: inline-block;
-    background-color: #d90429;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-transform: uppercase;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-text);
+    font-family: var(--font-accent);
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(var(--primary-color-rgb), 0.3);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    letter-spacing: 1px;
 }
-
-.button:hover, .cta-button:hover {
-    background-color: #b00322;
-    text-decoration: none;
-    color: #fff;
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(var(--secondary-color-rgb), 0.4);
+    color: var(--dark-text);
 }
 
 /* ヘッダー */
 header {
-    background-color: #1e1e1e;
-    color: #fff;
-    padding: 1em 0;
-    position: sticky;
+    background-color: rgba(var(--dark-bg-rgb), 0.8); /* var(--dark-bg) の少し透明 */
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* スクロール時のアニメーション用 */
 }
-
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-header h1 a {
-    color: #fff;
-    font-size: 1.8em;
-    white-space: nowrap; /* ロゴが長い場合に改行されるのを防ぐ */
+.logo img {
+    height: 40px; /* ロゴサイズ調整 */
 }
-header h1 a:hover {
-    text-decoration: none;
-}
-
-header nav {
-    flex-grow: 1; /* 利用可能なスペースを埋めるようにする */
-    display: flex;
-    justify-content: center; /* メニュー全体を中央に配置 (デスクトップ時) */
-    margin-left: 20px; /* ロゴとメニューの間に少しスペース */
-}
-
 header nav ul {
     list-style: none;
     display: flex;
-    justify-content: space-around; /* 各li要素が均等な間隔で配置されます */
-    width: 100%; /* nav要素いっぱいに広がるように */
-    padding: 0;
-    align-items: center; /* 項目が複数行になった場合の垂直中央揃え */
+    align-items: center;
 }
-
 header nav ul li {
-    /* padding: 0 5px; */ /* 必要に応じて左右のパディングを追加 */
+    margin-left: 25px;
 }
-
 header nav ul li a {
-    color: #fff;
     font-weight: bold;
-    padding: 10px 15px; /* クリックエリアを確保しつつ、均等配置を助ける */
-    display: block; /* paddingを有効にするため */
-    white-space: nowrap; /* メニュー項目が長い場合に改行されるのを防ぐ */
-    transition: color 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
 }
-header nav ul li a:hover {
-    color: #d90429;
-    text-decoration: none;
+.nav-cta {
+    padding: 8px 20px;
+    font-size: 0.8em;
 }
-
 .mobile-menu-button {
-    display: none; /* スマホ以外では非表示 */
+    display: none;
     background: none;
     border: none;
-    color: white;
+    color: var(--primary-color);
     font-size: 2em;
     cursor: pointer;
 }
 
-/* ヒーローセクション (トップページメインビジュアル) */
-.hero {
-    background: url('images/f1_hero_placeholder.jpg') no-repeat center center/cover;
-    color: #fff;
-    min-height: 60vh; /* 最小高さを設定 */
+/* ヒーローセクション */
+.hero-section {
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px; /* パディングを追加して端に寄りすぎないように */
-    border-bottom: 5px solid #d90429;
+    justify-content: center;
+    padding-top: 100px; /* ヘッダー分 */
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle, rgba(var(--primary-color-rgb),0.1) 0%, rgba(var(--dark-bg-rgb),1) 70%),
+                url('images/hero_background_pattern.svg') repeat; /* 背景パターン画像 */
+    background-size: cover, 200px; /* パターンサイズ */
 }
-
 .hero-content {
-    background-color: rgba(0, 0, 0, 0.6); /* 少し濃くして文字を読みやすく */
-    padding: 30px 40px;
-    border-radius: 10px;
-    max-width: 800px; /* コンテンツが広がりすぎないように */
+    text-align: center;
+    max-width: 700px;
+    position: relative;
+    z-index: 2;
+}
+.hero-content h1 {
+    margin-bottom: 0.2em;
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+}
+.hero-content h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--light-text);
+    margin-bottom: 1em;
+    font-weight: 400;
+}
+.hero-content p {
+    font-size: 1.1em;
+    margin-bottom: 2em;
+    color: rgba(224, 224, 224, 0.8);
+}
+.hero-cta {
+    font-size: 1.1em;
+}
+.hero-product-image {
+    position: absolute;
+    bottom: -50px; /* 少しはみ出す感じ */
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(250px, 50vw, 450px);
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+}
+.hero-product-image img {
+    filter: drop-shadow(0 10px 30px rgba(var(--primary-color-rgb),0.4));
 }
 
-.hero h2 {
-    font-size: 3em;
-    margin-bottom: 0.5em;
-    color: #fff;
-    line-height: 1.2;
+@keyframes float {
+    0% { transform: translateX(-50%) translateY(0px); }
+    50% { transform: translateX(-50%) translateY(-20px); }
+    100% { transform: translateX(-50%) translateY(0px); }
 }
 
-.hero p {
-    font-size: 1.2em;
-    margin-bottom: 1.5em; /* ボタンとの間隔を調整 */
+/* Glitch Effect for H1 */
+.glitch {
+    position: relative;
+    color: var(--primary-color);
+    /* animation: glitch-skew 1s infinite linear alternate-reverse; */ /* メインのskewは重い場合があるのでコメントアウトも検討 */
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg); /* Hide overflowing text */
+    overflow: hidden;
+}
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--secondary-color);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); /* アニメーション用の初期クリップ */
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--primary-color), 2px 2px var(--secondary-color);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); /* アニメーション用の初期クリップ */
+    animation: glitch-anim2 2s infinite linear alternate-reverse;
 }
 
-/* トップページ詳細セクション */
-#home-details {
-    background-color: #fff;
-    padding-top: 20px; /* 上のセクションとの間隔 */
+@keyframes glitch-anim {
+  0% { clip-path: polygon(0 20%, 100% 20%, 100% 25%, 0 25%); transform: translateX(-0.05em); }
+  20% { clip-path: polygon(0 40%, 100% 40%, 100% 45%, 0 45%); transform: translateX(0.02em); }
+  40% { clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%); transform: translateX(-0.02em); }
+  60% { clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%); transform: translateX(0.05em); }
+  80% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); transform: translateX(-0.02em); }
+  100% { clip-path: polygon(0 20%, 100% 20%, 100% 25%, 0 25%); transform: translateX(0); }
+}
+@keyframes glitch-anim2 {
+  0% { clip-path: polygon(0 70%, 100% 70%, 100% 75%, 0 75%); transform: translateX(0.03em); }
+  25% { clip-path: polygon(0 10%, 100% 10%, 100% 15%, 0 15%); transform: translateX(-0.05em); }
+  50% { clip-path: polygon(0 90%, 100% 90%, 100% 95%, 0 95%); transform: translateX(0.02em); }
+  75% { clip-path: polygon(0 30%, 100% 30%, 100% 35%, 0 35%); transform: translateX(-0.02em); }
+  100% { clip-path: polygon(0 70%, 100% 70%, 100% 75%, 0 75%); transform: translateX(0); }
 }
 
-.grid-container {
+
+/* 特徴セクション */
+.features-section {
+    background-color: rgba(var(--dark-bg-rgb), 0.8);
+    border-top: 1px solid rgba(var(--primary-color-rgb),0.1);
+    border-bottom: 1px solid rgba(var(--primary-color-rgb),0.1);
+}
+.features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* カードの最小幅調整 */
-    gap: 25px; /* カード間のスペースを少し広げる */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
 }
-
-.grid-item {
-    background-color: #f9f9f9;
-    padding: 25px; /* パディングを少し増やす */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.07); /* 影を少し調整 */
-    display: flex; /* flexboxを使って内容を整える */
-    flex-direction: column;
-}
-
-.grid-item h3 {
-    margin-top: 0;
-    border-bottom: 2px solid #d90429;
-    padding-bottom: 0.5em;
-    font-size: 1.3em; /* 見出しサイズ調整 */
-}
-
-.grid-item ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 1em; /* リストと「もっと見る」リンクの間にスペース */
-    flex-grow: 1; /* リンクが下に来るように */
-}
-
-.grid-item ul li {
-    margin-bottom: 0.6em;
-    font-size: 0.95em; /* テキストサイズ調整 */
-}
-
-.grid-item ul li a {
-    color: #333;
-}
-.grid-item ul li a:hover {
-    color: #d90429;
-}
-
-.more-link {
-    display: inline-block;
-    margin-top: auto; /* これでリンクがカードの下端に揃う (flexbox内) */
-    font-weight: bold;
-    font-size: 0.9em;
-    align-self: flex-start; /* リンクが左寄せになるように */
-}
-
-#countdown-timer {
-    font-size: 1.3em; /* 少し大きく */
-    font-weight: bold;
-    color: #d90429;
-    margin: 15px 0; /* 上下のマージン調整 */
+.feature-item {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
     text-align: center;
+    border: 1px solid rgba(var(--primary-color-rgb),0.2);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(var(--primary-color-rgb),0.2);
+}
+.feature-item img {
+    height: 60px;
+    margin: 0 auto 20px auto;
+    filter: drop-shadow(0 0 5px var(--primary-color));
+}
+.feature-item h3 {
+    margin-bottom: 0.5em;
+}
+.feature-item p {
+    font-size: 0.95em;
+    color: rgba(224, 224, 224, 0.7);
 }
 
-.next-gp p {
-    font-size: 0.9em;
-    line-height: 1.5;
+/* 成分紹介セクション */
+.ingredients-section {
+    /* default background */
+}
+.ingredient-highlight {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary-color);
+}
+.ingredient-highlight.reverse {
+    flex-direction: row-reverse;
+    border-left: none;
+    border-right: 5px solid var(--secondary-color);
+}
+.ingredient-highlight.reverse .ingredient-desc h3 {
+    color: var(--secondary-color);
+}
+.ingredient-image {
+    flex: 1 1 300px;
+}
+.ingredient-image img {
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.ingredient-desc {
+    flex: 2 1 400px;
+}
+.ingredient-desc h3 {
+    margin-bottom: 0.5em;
+}
+.ingredient-desc p {
+    color: rgba(224, 224, 224, 0.8);
 }
 
-/* 各セクションのプレースホルダー (コンテンツが入ると不要になる) */
-.content-placeholder {
-    background-color: #fff;
-    padding: 40px; /* パディングを増やす */
-    border-radius: 8px;
+/* ラインナップセクション */
+.lineup-section {
+    background: linear-gradient(rgba(var(--dark-bg-rgb),0.9), rgba(var(--dark-bg-rgb),0.9)),
+                url('images/lineup_background.jpg') no-repeat center center/cover;
+}
+.lineup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+.product-card {
+    background-color: rgba(30, 30, 60, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
-    min-height: 200px; /* 最低限の高さを確保 */
+    border: 1px solid rgba(var(--primary-color-rgb),0.3);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
-.content-placeholder p {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    color: #555;
+.product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(var(--primary-color-rgb),0.3);
 }
-.guide-sections a, .explore-sections a {
-    margin: 8px; /* ボタン間のマージン調整 */
+.product-card img {
+    height: 250px;
+    object-fit: contain;
+    margin: 0 auto 20px auto;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
+.product-card h3 {
+    margin-bottom: 0.3em;
+    font-size: 1.5em;
+}
+.flavor-desc {
+    font-family: var(--font-primary);
+    font-style: italic;
+    color: var(--secondary-color);
+    margin-bottom: 0.8em;
+    font-size: 0.9em;
+}
+.product-card p {
+    font-size: 0.9em;
+    color: rgba(224, 224, 224, 0.7);
+    margin-bottom: 1.5em;
+    flex-grow: 1;
+}
+.price {
+    font-family: var(--font-accent);
+    font-size: 1.3em;
+    color: var(--primary-color);
+    margin-bottom: 1em;
+}
+.buy-button {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    align-self: center;
+    width: 80%;
+    max-width: 200px;
+}
+.buy-button:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+.buy-button:disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+}
+.soon-badge {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--dark-text);
+    font-size: 0.6em;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: 5px;
+    vertical-align: middle;
 }
 
+/* ストーリーセクション */
+.story-section {
+    text-align: center;
+}
+.story-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.story-content p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+    color: rgba(224, 224, 224, 0.85);
+}
+.story-content p:first-child {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* CTAセクション */
+.cta-section {
+    background: linear-gradient(rgba(var(--secondary-color-rgb),0.1), rgba(var(--dark-bg-rgb),1) 70%),
+                var(--dark-bg);
+    text-align: center;
+    border-top: 1px solid rgba(var(--secondary-color-rgb),0.2);
+}
+.cta-section h2 {
+    color: var(--secondary-color);
+}
+.cta-section p {
+    margin-bottom: 2em;
+    font-size: 1.1em;
+}
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5em;
+}
+.store-button {
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+    min-width: 200px;
+}
+.store-button.online-store {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    border: 2px solid var(--primary-color);
+}
+.store-button.online-store:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
+.store-button.amazon, .store-button.retail {
+    background-color: transparent;
+    color: var(--light-text);
+    border: 2px solid var(--light-text);
+}
+.store-button.amazon:hover, .store-button.retail:hover {
+    background-color: var(--light-text);
+    color: var(--dark-bg);
+    border-color: var(--light-text);
+    transform: scale(1.05);
+}
+.discount-info {
+    font-size: 0.9em;
+    font-style: italic;
+    color: var(--primary-color);
+}
 
 /* フッター */
 footer {
-    background-color: #1e1e1e;
-    color: #ccc;
-    text-align: center;
-    padding: 40px 20px; /* パディング調整 */
+    background-color: #08081a;
+    padding: 60px 0 30px 0;
+    color: rgba(224, 224, 224, 0.7);
     font-size: 0.9em;
 }
-
-footer .footer-links {
-    margin-bottom: 20px; /* 間隔調整 */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+.footer-logo img {
+    height: 50px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+.footer-links {
+    flex: 1 1 200px;
+}
+.footer-links h4 {
+    color: var(--light-text);
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+.footer-links ul {
+    list-style: none;
+}
+.footer-links ul li {
+    margin-bottom: 0.7em;
+}
+.footer-links ul li a {
+    color: rgba(224, 224, 224, 0.7);
+}
+.footer-links ul li a:hover {
+    color: var(--primary-color);
+}
+.footer-social a {
+    margin-right: 15px;
+    display: inline-block;
+}
+.footer-social img {
+    height: 24px;
+    opacity: 0.7;
+    transition: opacity var(--transition-speed), transform var(--transition-speed);
+}
+.footer-social img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+.copyright {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(224, 224, 224, 0.1);
+}
+.copyright p {
+    margin-bottom: 0.5em;
+}
+.warning {
+    font-size: 0.8em;
+    color: rgba(224,224,224,0.5);
 }
 
-footer .footer-links a {
-    color: #ccc;
-    margin: 0 12px; /* リンク間のマージン調整 */
-    transition: color 0.3s ease;
-}
-footer .footer-links a:hover {
-    color: #fff;
-}
-
-footer .social-media {
-    margin-bottom: 20px; /* 間隔調整 */
-}
-footer .social-media p {
-    margin-bottom: 8px; /* テキストとアイコンの間隔 */
-}
-footer .social-media a {
-    color: #fff;
-    margin: 0 10px; /* アイコン間のマージン */
-    font-size: 1.6em;
-    transition: color 0.3s ease;
-}
-footer .social-media a:hover {
-    color: #d90429;
-}
-
-footer p {
-    margin-bottom: 8px; /* 各段落間のマージン */
-    line-height: 1.5;
-}
-
-/* レスポンシブデザイン */
-@media (max-width: 992px) { /* 少し広めのブレークポイントを追加 */
-    .hero h2 {
-        font-size: 2.5em;
+/* レスポンシブ対応 */
+@media (max-width: 992px) {
+    .hero-product-image {
+        width: clamp(200px, 40vw, 350px);
+        bottom: -30px;
     }
-    .hero p {
-        font-size: 1.1em;
-    }
-    header nav {
-        margin-left: 10px; /* ロゴとメニューの間を少し詰める */
-    }
-    header nav ul li a {
-        padding: 10px; /* パディングを少し減らす */
-        font-size: 0.9em; /* メニュー文字を少し小さく */
+    .ingredient-highlight, .ingredient-highlight.reverse {
+        gap: 20px;
     }
 }
-
 
 @media (max-width: 768px) {
     header .container {
-        flex-direction: row; /* ロゴとハンバーガーメニューを横並びに */
-        justify-content: space-between; /* これでロゴが左、ハンバーガーが右に */
-        align-items: center;
-        position: relative; /* ハンバーガーメニューの位置調整のため */
-    }
-    header h1 {
-        margin-bottom: 0; /* モバイル時のh1下のマージンをリセット */
+        position: relative;
     }
     header nav {
-        display: none; /* 初期状態では非表示 */
+        display: none;
         position: absolute;
-        top: 100%; /* ヘッダーの真下に表示 */
+        top: 100%;
         left: 0;
         width: 100%;
-        background-color: #1e1e1e; /* 背景色を指定 */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        z-index: 999; /* 他の要素より手前に */
-        margin-left: 0; /* リセット */
+        background-color: var(--dark-bg);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        padding: 10px 0;
+        border-top: 1px solid rgba(var(--primary-color-rgb), 0.2);
     }
-    header nav.active { /* JSでactiveクラスを付与 */
+    header nav.active {
         display: block;
     }
     header nav ul {
         flex-direction: column;
-        width: 100%;
-        align-items: stretch; /* 各項目が幅いっぱいに広がるように */
+        align-items: center;
     }
     header nav ul li {
-        margin: 0; /* リセット */
-        text-align: left; /* テキストを左寄せに */
-        border-bottom: 1px solid #444;
-    }
-    header nav ul li:last-child {
-        border-bottom: none;
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
     }
     header nav ul li a {
-        padding: 15px 20px; /* パディングを調整してタップしやすく */
-        width: 100%;
-        font-size: 1em; /* フォントサイズを戻すか調整 */
+        padding: 10px;
+        display: block;
+    }
+    .nav-cta {
+        margin-top: 10px;
     }
     .mobile-menu-button {
         display: block;
-        /* position: absolute; は不要に、flexアイテムとして配置される */
-        /* top: 15px; right: 20px; は不要に */
     }
 
-    .hero {
-        min-height: 50vh;
+    .hero-section {
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 150px;
+        text-align: center;
     }
-    .hero h2 {
-        font-size: 2em;
+    .hero-product-image {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 30px auto 0 auto;
+        width: clamp(200px, 60vw, 300px);
     }
-    .hero p {
-        font-size: 1em;
+    .features-grid, .lineup-grid {
+        grid-template-columns: 1fr;
     }
-    .hero-content {
-        padding: 20px;
+    .ingredient-highlight, .ingredient-highlight.reverse {
+        flex-direction: column;
+        text-align: center;
     }
-
-    .grid-container {
-        grid-template-columns: 1fr; /* 1列表示 */
+    .ingredient-image { width: 80%; margin: 0 auto 20px auto; }
+    .ingredient-highlight.reverse {
+        border-right: none;
+        border-left: 5px solid var(--secondary-color);
     }
-    .grid-item {
-        padding: 20px;
+    .store-buttons {
+        flex-direction: column;
+        align-items: center;
     }
-    .page-content {
-        padding: 0 15px; /* ページ全体の左右パディング */
+    .store-button { width: 80%; max-width: 300px; }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
     }
-    section {
-        padding: 30px 0;
-    }
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.6em; }
-    h3 { font-size: 1.2em; }
-
-    footer {
-        padding: 30px 15px;
-    }
-    footer .footer-links a {
-        display: block; /* 縦並びに */
-        margin: 8px 0;
-    }
+    .footer-links { margin-bottom: 20px; }
+    .footer-social { margin-top: 10px; }
 }
